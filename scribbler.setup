@@ -1,0 +1,8 @@
+# -*- mode: org; -*-
+#+AUTHOR: b-coimbra (Bruno Coimbra, index)
+#+EMAIL: mail@metaphoric.dev
+#+STARTUP: noptag
+#+OPTIONS: timestamp:t toc:2 H:4 num:t
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://b-coimbra.github.io/org-scribbler-theme/src/css/style.css" />
+#+HTML_HEAD: <script src="https://b-coimbra.github.io/org-scribbler-theme/src/js/script.js" />
