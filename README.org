@@ -1,0 +1,20 @@
+#+TITLE: Scribbler Theme
+
+Dark theme for org-mode HTML exports.
+
+  [[https://i.imgur.com/IsP3uNl.png]]
+
+* Usage
+
+  Import scribbler into your .org file by adding the following line in the header:
+  #+begin_src org
+    ,#+setupfile: https://b-coimbra.github.io/org-scribbler-theme/scribbler.setup
+  #+end_src
+
+** Tags
+
+   Tags can be added by assigning an '@' symbol at the beginning of a word in the title.
+
+   #+begin_src org
+     ,#+title: Some title @tag @anothertag
+   #+end_src
