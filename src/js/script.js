@@ -20,7 +20,10 @@ window.onload = () => {
     tags: '.tags',
     introduction: '#content > p',
     firstOutline: 'div[id^=outline-container-org]:first-of-type',
-    toc: '#table-of-contents'
+    toc: '#table-of-contents',
+    tocLabel: '#table-of-contents > h2',
+    tocLinks: '#table-of-contents ul li',
+    containers: '[id^=outline-container-org]'
   });
 
   const tagMappings = [
@@ -58,6 +61,23 @@ window.onload = () => {
   const setTags = () =>
         refs.tags.insertAdjacentElement('beforebegin', refs.subtitle);
 
+  const changeLinkState = () => {
+    const { containers, tocLinks: links } = refs;
+
+    let index = containers.length;
+
+    while (--index && refs.content.scrollTop < containers[index].offsetTop) { }
+
+    links.forEach((link) => link.classList.remove('active'));
+
+    const parent = links[index].parentNode.parentNode;
+
+    if (parent.tagName === 'LI')
+      parent.classList.add('active');
+
+    links[index].classList.add('active');
+  };
+
   const createHeader = () => {
     const header = `
       <div class="header">
@@ -80,9 +100,14 @@ window.onload = () => {
 
     refs.content.insertAdjacentHTML('afterbegin', header);
 
+    refs.tocLabel.innerText = 'Contents';
+
     setTags();
     setTitle();
   };
 
   createHeader();
+
+  changeLinkState();
+  refs.content.onscroll = changeLinkState;
 };
