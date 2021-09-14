@@ -2,7 +2,7 @@
 
 Dark theme for org-mode HTML exports.
 
-  [[https://i.imgur.com/IsP3uNl.png]]
+  [[https://i.imgur.com/qwMUXC3.png]]
 
 * Usage
 

@@ -2,7 +2,7 @@
 #+AUTHOR: b-coimbra (Bruno Coimbra, index)
 #+EMAIL: mail@metaphoric.dev
 #+STARTUP: noptag
-#+OPTIONS: timestamp:t toc:t H:4 num:nil
+#+OPTIONS: timestamp:t toc:2 H:4 num:nil
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="C:\Users\Bruno\AppData\Roaming\.emacs.d\var\org\setups\scribbler\src\css\style.css" />
 #+HTML_HEAD: <script src="C:\Users\Bruno\AppData\Roaming\.emacs.d\var\org\setups\scribbler\src\js\script.js" />

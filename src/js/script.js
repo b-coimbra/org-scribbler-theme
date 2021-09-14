@@ -46,7 +46,9 @@ window.onload = () => {
         refs.createdDate.innerText.match(matchers.date)[0];
 
   const getTags = () => {
-    const tags = refs.title.innerText.trim().match(matchers.tag).map(s => s.replace('@', ''));
+    const tags = refs.title.innerText.trim().match(matchers.tag)?.map(s => s.replace('@', ''));
+
+    if (!tags) return [];
 
     return tagMappings.filter(tag => tags.includes(tag.name));
   };
@@ -64,32 +66,36 @@ window.onload = () => {
   const changeLinkState = () => {
     const { containers, content, tocLinks: links } = refs;
 
+    if (!links) return;
+
     const deactivateAll = () =>
           links.forEach((link) => link.classList.remove('active'));
-
-    links.forEach(link => {
-      link.onclick = () => {
-        deactivateAll();
-        link.classList.add('active');
-      };
-    });
 
     let index = containers.length;
 
     while (--index && refs.content.scrollTop < containers[index].offsetTop) { }
 
-    const parent = links[index].parentNode.parentNode;
+    if (links.length) {
+      links.forEach(link => {
+        link.onclick = () => {
+          deactivateAll();
+          link.classList.add('active');
+        };
+      });
 
-    deactivateAll();
-
-    if (parent.tagName === 'LI')
-      parent.classList.add('active');
-
-    links[index].classList.add('active');
-
-    if (content.scrollTop >= (content.scrollHeight - content.offsetHeight)) {
       deactivateAll();
-      links[links.length - 1].classList.add('active');
+
+      const parent = links[index]?.parentNode?.parentNode;
+
+      if (parent?.tagName === 'LI')
+        parent.classList.add('active');
+
+      links[index].classList.add('active');
+
+      if (content.scrollTop >= (content.scrollHeight - content.offsetHeight)) {
+        deactivateAll();
+        links[links.length - 1].classList.add('active');
+      }
     }
   };
 
@@ -110,12 +116,19 @@ window.onload = () => {
     if (refs.toc)
       refs.content.insertAdjacentElement('beforebegin', refs.toc);
 
-    if (refs.introduction)
-      [...refs.introduction].reverse().forEach(paragraph => refs.firstOutline.insertAdjacentElement('afterbegin', paragraph));
+    if (refs.introduction) {
+      if (refs.introduction.length)
+        Array.from(refs.introduction)
+          .reverse()
+          .forEach(paragraph => refs.firstOutline.insertAdjacentElement('afterbegin', paragraph));
+      else
+        refs.firstOutline.insertAdjacentElement('afterbegin', refs.introduction);
+    }
 
     refs.content.insertAdjacentHTML('afterbegin', header);
 
-    refs.tocLabel.innerText = 'Contents';
+    if (refs.tocLabel)
+      refs.tocLabel.innerText = 'Contents';
 
     setTags();
     setTitle();
