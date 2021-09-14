@@ -46,11 +46,13 @@ window.onload = () => {
         refs.createdDate.innerText.match(matchers.date)[0];
 
   const getTags = () => {
-    const tags = refs.title.innerText.trim().match(matchers.tag)?.map(s => s.replace('@', ''));
+    const tags = refs.title?.innerText.trim().match(matchers.tag)?.map(s => s.replace('@', ''));
 
     if (!tags) return [];
 
-    return tagMappings.filter(tag => tags.includes(tag.name));
+    return tags.map(tag =>
+      tagMappings.find(t => t.name === tag) ?? { name: tag, color: '#6095ad' }
+    );
   };
 
   const setTitle = () => {
@@ -60,7 +62,7 @@ window.onload = () => {
     }
   };
 
-  const setTags = () =>
+  const setSubtitle = () =>
         refs.tags.insertAdjacentElement('beforebegin', refs.subtitle);
 
   const changeLinkState = () => {
@@ -103,7 +105,7 @@ window.onload = () => {
     const header = `
       <div class="header">
         <div class="tags">
-          <div class="created-date tag">${getDate()}</div>
+          ${refs.createdDate ? `<div class="created-date tag">${getDate()}</div>` : ''}
           ${
             getTags()
               .map(tag =>
@@ -130,8 +132,8 @@ window.onload = () => {
     if (refs.tocLabel)
       refs.tocLabel.innerText = 'Contents';
 
-    setTags();
-    setTitle();
+    if (refs.tags && refs.subtitle) setSubtitle();
+    if (refs.header && refs.title) setTitle();
   };
 
   createHeader();

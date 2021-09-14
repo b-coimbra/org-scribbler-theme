@@ -122,11 +122,11 @@ b {
 }
 
 .header {
-    min-height: 200px;
+    max-height: 200px;
     background: #242424;
     padding: 1.5em 3em;
     display: grid;
-    grid-template-rows: [title] .1fr [subtitle] auto [tags] 25px;
+    grid-template-rows: [title] .1fr [subtitle] minmax(30px, 80px) [tags] 25px;
 }
 
 .tags {
