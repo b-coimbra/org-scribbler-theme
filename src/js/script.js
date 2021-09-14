@@ -62,20 +62,35 @@ window.onload = () => {
         refs.tags.insertAdjacentElement('beforebegin', refs.subtitle);
 
   const changeLinkState = () => {
-    const { containers, tocLinks: links } = refs;
+    const { containers, content, tocLinks: links } = refs;
+
+    const deactivateAll = () =>
+          links.forEach((link) => link.classList.remove('active'));
+
+    links.forEach(link => {
+      link.onclick = () => {
+        deactivateAll();
+        link.classList.add('active');
+      };
+    });
 
     let index = containers.length;
 
     while (--index && refs.content.scrollTop < containers[index].offsetTop) { }
 
-    links.forEach((link) => link.classList.remove('active'));
-
     const parent = links[index].parentNode.parentNode;
+
+    deactivateAll();
 
     if (parent.tagName === 'LI')
       parent.classList.add('active');
 
     links[index].classList.add('active');
+
+    if (content.scrollTop >= (content.scrollHeight - content.offsetHeight)) {
+      deactivateAll();
+      links[links.length - 1].classList.add('active');
+    }
   };
 
   const createHeader = () => {
@@ -107,7 +122,7 @@ window.onload = () => {
   };
 
   createHeader();
-
   changeLinkState();
+
   refs.content.onscroll = changeLinkState;
 };
