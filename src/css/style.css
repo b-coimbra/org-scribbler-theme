@@ -32,6 +32,11 @@ body {
     display: none;
 }
 
+#text-table-of-contents {
+    overflow-x: scroll;
+    height: 100%;
+}
+
 #text-table-of-contents li::marker {
     content: '';
 }
@@ -128,14 +133,13 @@ b {
     background: #181818;
     right: 0;
     left: 0;
+    padding-bottom: 1em;
 }
 
 .header {
     max-height: 200px;
     background: #242424;
     padding: 1.5em 3em;
-    /* display: grid; */
-    /* grid-template-rows: [title] .1fr [subtitle] minmax(30px, 80px) [tags] 25px; */
 }
 
 .tags {
@@ -271,11 +275,11 @@ table th {
 #table-of-contents {
     position: absolute;
     height: 100%;
-    width: 300px;
+    width: 250px;
     background: transparent;
     margin: auto;
     right: 0;
-    left: calc(-700px - 300px);
+    left: calc(-700px - 350px);
     padding: 1em 1.5em;
 }
 
@@ -308,7 +312,7 @@ table th {
 }
 
 #text-table-of-contents li.active > a {
-    color: white;
+    color: #d0d0d0;
     font-weight: 700;
 }
 
@@ -319,22 +323,23 @@ table th {
 #text-table-of-contents li.active > ul {
     height: auto;
     padding: .2em 1.5em 0;
+    margin-top: 10px;
 }
 
 #text-table-of-contents ul li:last-child {
     padding-bottom: 0;
 }
 
-#text-table-of-contents > ul > li.active::after {
-    content: '';
-    display: block;
-    width: 3px;
-    height: 100%;
-    background: white;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
+/* #text-table-of-contents > ul > li.active::after { */
+/*     content: ''; */
+/*     display: block; */
+/*     width: 3px; */
+/*     height: 100%; */
+/*     background: white; */
+/*     position: absolute; */
+/*     right: 0; */
+/*     top: 0; */
+/* } */
 
 #text-table-of-contents li:hover > a {
     color: white;
