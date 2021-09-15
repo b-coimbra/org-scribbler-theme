@@ -65,9 +65,13 @@ li {
     padding: .2em 0;
 }
 
-a {
+a:not([href^='#org']) {
     color: #97b7e6;
     font-weight: bold;
+}
+
+a[href^='#org'] {
+    color: inherit;
 }
 
 img {

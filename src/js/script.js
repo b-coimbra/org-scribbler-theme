@@ -23,7 +23,8 @@ window.onload = () => {
     toc: '#table-of-contents',
     tocLabel: '#table-of-contents > h2',
     tocLinks: '#table-of-contents ul li',
-    containers: '[id^=outline-container-org]'
+    containers: '[id^=outline-container-org]',
+    headlines: '[id^=outline-container-org] h2, [id^=outline-container-org] h3'
   });
 
   const tagMappings = [
@@ -109,6 +110,12 @@ window.onload = () => {
     }
   };
 
+  const addHeadlineLinks = () => {
+    refs.headlines.forEach(headline => {
+      headline.innerHTML = `<a href="#${headline.getAttribute('id')}">${headline.innerText}</a>`;
+    });
+  };
+
   const createHeader = () => {
     const header = `
       <div class="header">
@@ -144,6 +151,7 @@ window.onload = () => {
     if (refs.header && refs.title) setTitle();
   };
 
+  addHeadlineLinks();
   createHeader();
   changeLinkState();
 
