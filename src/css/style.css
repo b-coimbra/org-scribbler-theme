@@ -11,6 +11,7 @@
 
 body {
     background: #131313;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -67,6 +68,10 @@ li {
 a {
     color: #97b7e6;
     font-weight: bold;
+}
+
+img {
+    max-width: 100%;
 }
 
 #content h2,
@@ -349,4 +354,12 @@ table th {
 .todo, .done {
     padding: 2px 5px;
     border-radius: 5px;
+}
+
+blockquote {
+    font-style: italic;
+    background: #1f1f1f;
+    padding: 0 1em;
+    border-radius: 5px;
+    border-left: 5px solid #717171;
 }
