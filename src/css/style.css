@@ -193,14 +193,6 @@ b {
     font-weight: 700;
 }
 
-.title::before {
-    content: '#';
-    font: 500 19pt 'Raleway', sans-serif;
-    position: absolute;
-    left: -25px;
-    color: #b19370;
-}
-
 .subtitle {
     grid-row: subtitle;
     font-size: 10pt;
