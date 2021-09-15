@@ -34,6 +34,14 @@ window.onload = () => {
     {
       name: 'automation',
       color: '#8db992'
+    },
+    {
+      name: 'dotfiles',
+      color: '#afa6ea'
+    },
+    {
+      name: 'emacs',
+      color: '#fdd262'
     }
   ];
 
