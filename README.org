@@ -2,7 +2,7 @@
 
 Dark theme for org-mode HTML exports.
 
-  [[https://i.imgur.com/qwMUXC3.png]]
+[[https://i.imgur.com/qwMUXC3.png]]
 
 * Usage
 
@@ -10,6 +10,14 @@ Dark theme for org-mode HTML exports.
   #+begin_src org
     ,#+setupfile: https://b-coimbra.github.io/org-scribbler-theme/scribbler.setup
   #+end_src
+
+** Subtitle
+
+   Subtitles can be added with the following tag:
+
+   #+begin_src org
+     ,#+subtitle: Some subtitle
+   #+end_src
 
 ** Tags
 
