@@ -119,7 +119,7 @@ window.onload = () => {
 
   const addHeadlineLinks = () => {
     refs.headlines.forEach(headline => {
-      headline.innerHTML = `<a href="#${headline.getAttribute('id')}">${headline.innerText}</a>`;
+      headline.innerHTML = `<a href="#${headline.getAttribute('id')}">${headline.innerHTML}</a>`;
     });
   };
 
