@@ -2,7 +2,7 @@
 
 Dark theme for org-mode HTML exports.
 
-[[https://i.imgur.com/qwMUXC3.png]]
+[[https://i.imgur.com/zu8FKea.png]]
 
 Preview: [[https://notes.metaphoric.dev][https://notes.metaphoric.dev]]
 
