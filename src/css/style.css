@@ -156,7 +156,6 @@ b {
     letter-spacing: .5px;
     height: 25px;
     padding: 1em;
-    max-width: 90px;
     border-radius: 50px;
     white-space: nowrap;
 }
@@ -213,6 +212,20 @@ b {
     font-weight: 500;
     color: #aca59d;
     margin-bottom: 30px;
+}
+
+.author {
+    margin-bottom: 10px;
+    font-size: 11px;
+    letter-spacing: .5px;
+    font-family: 'Raleway', sans-serif;
+    color: #d1cac2;
+    font-weight: bold;
+}
+
+.author span {
+    color: #696969;
+    font-weight: 500;
 }
 
 code {

@@ -17,6 +17,7 @@ window.onload = () => {
     header: '.header',
     content: '#content',
     createdDate: '.date:first-child',
+    author: '.author',
     tags: '.tags',
     introduction: '#content > p',
     firstOutline: 'div[id^=outline-container-org]:first-of-type',
@@ -54,6 +55,9 @@ window.onload = () => {
   const getDate = () =>
         refs.createdDate.innerText.match(matchers.date)[0];
 
+  const getAuthor = () =>
+        refs.author.innerText.split('Author: ').join('');
+
   const getTags = () => {
     const tags = refs.title?.innerText.trim().match(matchers.tag)?.map(s => s.replace('@', ''));
 
@@ -73,6 +77,9 @@ window.onload = () => {
 
   const setSubtitle = () =>
         refs.tags.insertAdjacentElement('beforebegin', refs.subtitle);
+
+  const setAuthor = () =>
+        refs.tags.insertAdjacentHTML('beforebegin', `<p class="author"><span>by</span> ${getAuthor()}</p>`);
 
   const changeLinkState = () => {
     const { containers, content, tocLinks: links } = refs;
@@ -148,6 +155,7 @@ window.onload = () => {
       refs.tocLabel.innerText = 'Contents';
 
     if (refs.tags && refs.subtitle) setSubtitle();
+    if (refs.tags && refs.author) setAuthor();
     if (refs.header && refs.title) setTitle();
   };
 
