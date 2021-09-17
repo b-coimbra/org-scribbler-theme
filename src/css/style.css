@@ -287,12 +287,60 @@ table th {
 #table-of-contents {
     position: absolute;
     height: 100%;
-    width: 250px;
+    width: 200px;
     background: transparent;
     margin: auto;
     right: 0;
-    left: calc(-700px - 350px);
-    padding: 1em 1.5em;
+    left: calc(-800px - 200px);
+    padding: 1em 0;
+}
+
+@media (max-width: 1280px) {
+    #table-of-contents {
+        left: calc(-100% + 200px);
+        padding-left: 1em;
+    }
+}
+
+@media (max-width: 1230px) {
+    #content {
+        left: auto;
+        width: calc(100% - 200px);
+    }
+}
+
+@media (max-width: 980px) {
+    #content {
+        width: 100%;
+    }
+
+    #table-of-contents {
+        z-index: 9;
+        width: 250px;
+        right: auto;
+        left: -240px;
+        border-right: 10px solid #46607b;
+        background: #131313;
+        transition: left .3s;
+    }
+
+    #table-of-contents::after {
+        content: '';
+        background: #46607b;
+        position: absolute;
+        width: 20px;
+        height: 45px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: block;
+        right: -20px;
+        border-radius: 0 10px 10px;
+    }
+
+    #table-of-contents:hover {
+        left: 0;
+    }
 }
 
 #text-table-of-contents a {
