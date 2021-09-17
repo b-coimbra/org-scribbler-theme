@@ -118,7 +118,9 @@ window.onload = () => {
   };
 
   const addHeadlineLinks = () => {
-    refs.headlines.forEach(headline => {
+    if (!refs.headlines) return;
+
+    Array.from(refs.headlines).forEach(headline => {
       headline.innerHTML = `<a href="#${headline.getAttribute('id')}">${headline.innerHTML}</a>`;
     });
   };
