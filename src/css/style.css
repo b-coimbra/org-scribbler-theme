@@ -66,12 +66,27 @@ p, ol {
     position: relative;
 }
 
+ul {
+    padding-left: 1.5em;
+}
+
 li {
     padding: .2em 0;
 }
 
 a:not([href^='#org']) {
-    color: #97b7e6;
+    color: #8dc1ef;
+}
+
+a:not([href^='#org']):hover {
+    color: #6a94b9;
+}
+
+a:not([href^='#org'])::before {
+    content: '\1F517';
+    font-size: 13px;
+    margin-right: 3px;
+    filter: opacity(0.4);
     font-weight: bold;
 }
 
@@ -389,17 +404,6 @@ table th {
 #text-table-of-contents ul li:last-child {
     padding-bottom: 0;
 }
-
-/* #text-table-of-contents > ul > li.active::after { */
-/*     content: ''; */
-/*     display: block; */
-/*     width: 3px; */
-/*     height: 100%; */
-/*     background: white; */
-/*     position: absolute; */
-/*     right: 0; */
-/*     top: 0; */
-/* } */
 
 #text-table-of-contents li:hover > a {
     color: white;
