@@ -4,6 +4,8 @@ Dark theme for org-mode HTML exports.
 
 [[https://i.imgur.com/qwMUXC3.png]]
 
+Preview: [[https://notes.metaphoric.dev][https://notes.metaphoric.dev]]
+
 * Usage
 
   Import scribbler into your .org file by adding the following line in the header:
@@ -25,4 +27,15 @@ Dark theme for org-mode HTML exports.
 
    #+begin_src org
      ,#+title: Some title @tag @anothertag
+   #+end_src
+
+** Example configuration
+
+   #+begin_src org
+     ,#+TITLE: Angular @framework
+     ,#+SUBTITLE: Angular is a platform for building mobile and desktop web applications.
+     ,#+DATE: <2021-09-11 Sat>
+     ,#+AUTHOR: Bruno Coimbra (b-coimbra)
+     ,#+EMAIL: me@metaphoric.dev
+     ,#+SETUPFILE: https://b-coimbra.github.io/org-scribbler-theme/scribbler.setup
    #+end_src
