@@ -124,8 +124,8 @@ b {
     color: #acadb5;
 }
 
-#content h2::before,
-#content h3::before {
+#content h2 > a::before,
+#content h3 > a::before {
     content: '#';
     position: absolute;
     left: -25px;
@@ -134,8 +134,8 @@ b {
     z-index: 1;
 }
 
-#content h2:hover::before,
-#content h3:hover::before {
+#content h2 > a:hover::before,
+#content h3 > a:hover::before {
     color: #acaeb6;
 }
 
@@ -272,6 +272,7 @@ pre.src {
     border: 1px solid #383838;
     border-radius: 10px;
     margin: 1em 0;
+    background: #1f1f1f;
 }
 
 table {
