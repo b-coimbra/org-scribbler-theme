@@ -246,7 +246,10 @@ code {
     border-radius: 5px;
     padding: 2px 5px;
     border: 1px solid #2f2f2f;
-    color: #c1c1c1;
+    color: #e18c84;
+    font-weight: 500;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 13px;
 }
 
 pre {
