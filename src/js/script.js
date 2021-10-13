@@ -143,7 +143,7 @@ window.onload = () => {
       refs.content.insertAdjacentElement('beforebegin', refs.toc);
 
     if (refs.introduction) {
-      if (refs.introduction.length)
+      if (refs.introduction.length && refs.firstOutline)
         Array.from(refs.introduction)
           .reverse()
           .forEach(paragraph => refs.firstOutline.insertAdjacentElement('afterbegin', paragraph));
