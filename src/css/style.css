@@ -75,7 +75,8 @@ li {
 }
 
 a:not([href^='#org']) {
-    color: #8dc1ef;
+    color: #86afe3;
+    font-weight: bold;
 }
 
 a:not([href^='#org']):hover {
@@ -83,11 +84,13 @@ a:not([href^='#org']):hover {
 }
 
 a:not([href^='#org'])::before {
-    content: '\1F517';
-    font-size: 13px;
+    content: '\e157';
+    font-size: 16pt;
     margin-right: 3px;
-    filter: opacity(0.4);
-    font-weight: bold;
+    font-family: 'Material Icons';
+    vertical-align: middle;
+    line-height: 0;
+    font-weight: normal;
 }
 
 a[href^='#org'] {
@@ -126,12 +129,15 @@ b {
 
 #content h2 > a::before,
 #content h3 > a::before {
-    content: '#';
+content: '\e9ef';
     position: absolute;
     left: -25px;
-    color: #5e5f63;
+    color: #61636a;
     background: #181818;
     z-index: 1;
+    font-family: 'Material Icons';
+    line-height: 1.2;
+    font-weight: 100;
 }
 
 #content h2 > a:hover::before,
@@ -246,7 +252,7 @@ code {
     border-radius: 5px;
     padding: 2px 5px;
     border: 1px solid #2f2f2f;
-    color: #e18c84;
+    color: #e3a39c;
     font-weight: 500;
     font-family: 'Roboto Mono', sans-serif;
     font-size: 13px;
@@ -437,7 +443,42 @@ table th {
 blockquote {
     font-style: italic;
     background: #1f1f1f;
-    padding: 0 1em;
+    padding: 0 1em 0 .6em;
     border-radius: 5px;
-    border-left: 5px solid #717171;
+    border-left: 35px solid #323232;
+    position: relative;
+}
+
+blockquote::before {
+    font-family: 'Material Icons', sans-serif;
+    content: '\e244';
+    position: absolute;
+    color: #686868;
+    font-size: 24pt;
+    left: -37px;
+    top: 0;
+    margin: auto;
+    height: 30px;
+    bottom: 0;
+}
+
+
+.timestamp {
+    color: #ababab;
+    display: inline-flex;
+    align-items: center;
+    font-size: 10pt;
+    padding: .2em .5em;
+    line-height: 18px;
+    font-weight: bold;
+    box-shadow: 0 0 0 1px #383838;
+    border-radius: 3px;
+}
+
+.timestamp::before {
+    content: '\e8b5';
+    font-family: 'Material Icons';
+    margin: 2px 5px 0 0;
+    line-height: 0;
+    color: #6a6a6a;
 }

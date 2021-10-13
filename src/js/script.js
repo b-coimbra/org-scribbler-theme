@@ -19,7 +19,7 @@ window.onload = () => {
     createdDate: '.date:first-child',
     author: '.author',
     tags: '.tags',
-    introduction: '#content > p',
+    introduction: '#content > *:not(.header):not([id^=outline])',
     firstOutline: 'div[id^=outline-container-org]:first-of-type',
     toc: '#table-of-contents',
     tocLabel: '#table-of-contents > h2',

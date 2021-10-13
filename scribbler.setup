@@ -5,4 +5,5 @@
 
 #+HTML_HEAD: <meta name="viewport" content="width=device-width, initial-scale=1">
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://b-coimbra.github.io/org-scribbler-theme/src/css/style.css" />
+#+HTML_HEAD: <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 #+HTML_HEAD: <script src="https://b-coimbra.github.io/org-scribbler-theme/src/js/script.js" />
