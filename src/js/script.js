@@ -28,25 +28,6 @@ window.onload = () => {
     headlines: '[id^=outline-container-org] h2, [id^=outline-container-org] h3'
   });
 
-  const tagMappings = [
-    {
-      name: 'git',
-      color: '#9c6464'
-    },
-    {
-      name: 'automation',
-      color: '#8db992'
-    },
-    {
-      name: 'dotfiles',
-      color: '#afa6ea'
-    },
-    {
-      name: 'emacs',
-      color: '#fdd262'
-    }
-  ];
-
   const matchers = {
     date: /(\d+\-?)+/,
     tag: /@\w+/g
@@ -58,14 +39,22 @@ window.onload = () => {
   const getAuthor = () =>
         refs.author.innerText.split('Author: ').join('');
 
-  const getTags = () => {
-    const tags = refs.title?.innerText.trim().match(matchers.tag)?.map(s => s.replace('@', ''));
+  const getTags = async () => {
+    if (document.URL.startsWith('file')) return [];
+
+    const filepath = window.location.pathname
+          .split('/')
+          .slice(-1)[0]
+          .split('.')[0];
+
+    const tags = await fetch(`${window.location.origin}/tags.json`)
+      .then(response => response.json())
+      .then(data => data?.tags?.filter(x => x.files.includes(filepath)))
+      .catch(() => console.log('No tags.json found.'));
 
     if (!tags) return [];
 
-    return tags.map(tag =>
-      tagMappings.find(t => t.name === tag) ?? { name: tag, color: '#6095ad' }
-    );
+    return tags;
   };
 
   const setTitle = () => {
@@ -125,15 +114,17 @@ window.onload = () => {
     });
   };
 
-  const createHeader = () => {
+  const createHeader = async () => {
+    const tags = await getTags();
+
     const header = `
       <div class="header">
         <div class="tags">
           ${refs.createdDate ? `<div class="created-date tag">${getDate()}</div>` : ''}
           ${
-            getTags()
+            tags
               .map(tag =>
-                `<div class="tag" style="--tag-color: ${tag.color}">${tag.name}</div>`)
+                `<div class="tag" style="--tag-color: ${tag.color || '#6095ad'}">${tag.name}</div>`)
               .join('')
           }
         </div>
