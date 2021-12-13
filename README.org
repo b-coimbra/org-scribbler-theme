@@ -23,7 +23,7 @@ Preview: [[https://notes.metaphoric.dev][https://notes.metaphoric.dev]]
 
 ** Tags
 
-   Tags can be added by editing the =docs/tags.json= file.
+   Tags can be added by creating a =tags.json= file in the root of your .html files.
 
    Example:
 
