@@ -139,7 +139,7 @@ window.onload = () => {
           .reverse()
           .forEach(paragraph => refs.firstOutline.insertAdjacentElement('afterbegin', paragraph));
       else
-        refs.firstOutline.insertAdjacentElement('afterbegin', refs.introduction);
+        refs.firstOutline?.insertAdjacentElement('afterbegin', refs.introduction);
     }
 
     refs.content.insertAdjacentHTML('afterbegin', header);
