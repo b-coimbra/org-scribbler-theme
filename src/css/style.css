@@ -83,7 +83,7 @@ a:not([href^='#org']):hover {
     color: #6a94b9;
 }
 
-a:not([href^='#org'])::before {
+a:not([href^='#org']):not([ignore-icon='link'])::before {
     content: '\e157';
     margin-right: 3px;
     font-family: 'Material Icons';
@@ -463,7 +463,6 @@ blockquote::before {
     bottom: 0;
 }
 
-
 .timestamp {
     color: #ababab;
     display: inline-flex;
@@ -482,4 +481,19 @@ blockquote::before {
     margin: 2px 5px 0 0;
     line-height: 0;
     color: #6a6a6a;
+}
+
+.credits {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 9pt;
+    color: #585858;
+    background: #131313;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.credits a {
+    color: #787878;
 }

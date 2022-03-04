@@ -114,6 +114,19 @@ window.onload = () => {
     });
   };
 
+  const addCredits = () => {
+    const credits = `
+        <p class="credits">
+          <span>Made with<span>
+          <a href="https://github.com/b-coimbra/org-scribbler-theme" ignore-icon="link">
+            org-scribbler
+          </a>
+        </p>
+      `;
+
+    refs.toc.insertAdjacentHTML('beforeend', credits);
+  };
+
   const createHeader = async () => {
     const tags = await getTags();
 
@@ -155,6 +168,7 @@ window.onload = () => {
   addHeadlineLinks();
   createHeader();
   changeLinkState();
+  addCredits();
 
   refs.content.onscroll = changeLinkState;
 };
