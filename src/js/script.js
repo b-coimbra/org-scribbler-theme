@@ -19,13 +19,15 @@ window.onload = () => {
     createdDate: '.date:first-child',
     author: '.author',
     tags: '.tags',
+    fileTags: '.tag:not(.created-date)',
     introduction: '#content > *:not(.header):not([id^=outline])',
     firstOutline: 'div[id^=outline-container-org]:first-of-type',
     toc: '#table-of-contents',
     tocLabel: '#table-of-contents > h2',
     tocLinks: '#table-of-contents ul li',
     containers: '[id^=outline-container-org]',
-    headlines: '[id^=outline-container-org] h2, [id^=outline-container-org] h3'
+    headlines: '[id^=outline-container-org] h2, [id^=outline-container-org] h3',
+    tagViewer: '.tag-viewer'
   });
 
   const matchers = {
@@ -33,42 +35,99 @@ window.onload = () => {
     tag: /@\w+/g
   };
 
+  const hasClass = (el, className) =>
+    el.classList.contains(className);
+
   const getDate = () =>
-        refs.createdDate.innerText.match(matchers.date)[0];
+    refs.createdDate.innerText.match(matchers.date)[0];
 
   const getAuthor = () =>
-        refs.author.innerText.split('Author: ').join('');
+    refs.author.innerText.split('Author: ').join('');
 
-  const getTags = async () => {
+  const getAllTags = async () => {
     if (document.URL.startsWith('file')) return [];
 
-    const filepath = window.location.pathname
-          .split('/')
-          .slice(-1)[0]
-          .split('.')[0];
-
-    const tags = await fetch(`${window.location.origin}/tags.json`)
+    return await fetch(`${window.location.origin}/tags.json`)
       .then(response => response.json())
-      .then(data => data?.tags?.filter(x => x.files.includes(filepath)))
       .catch(() => console.log('No tags.json found.'));
+  };
+
+  const getCurrentTags = async () => {
+    const filepath = window.location.pathname
+      .split('/')
+      .slice(-1)[0]
+      .split('.')[0];
+
+    const tags = await getAllTags()
+      .then(data => data?.tags?.filter(x => x.files.includes(filepath)))
+      .catch(() => console.log('Error fetching tags for current file.'));
 
     if (!tags) return [];
 
     return tags;
   };
 
-  const setTitle = () => {
-    if (refs.title) {
-      refs.title.innerText = refs.title.innerText.trim().replace(matchers.tag, '');
-      refs.header.insertAdjacentElement('afterbegin', refs.title);
+  const searchByTag = async (tagNames) => {
+    if (!tagNames.length) {
+      refs?.tagViewer?.remove();
+      return;
     }
+
+    await getAllTags()
+      .then(data => Array.from(new Set(
+        data?.tags
+          ?.filter(x => tagNames.includes(x.name))
+          ?.map(x => x.files)
+          ?.flat())))
+      .then(files => setTagViewer(files));
   };
 
-  const setSubtitle = () =>
-        refs.tags.insertAdjacentElement('beforebegin', refs.subtitle);
+  const addFileTagEvents = () => {
+    const fileTags = Array.from(document.querySelectorAll('.tag:not(.created-date)'));
 
-  const setAuthor = () =>
-        refs.tags.insertAdjacentHTML('beforebegin', `<p class="author"><span>by</span> ${getAuthor()}</p>`);
+    fileTags.forEach(tag => {
+      tag.onclick = ({ currentTarget: target }) => {
+        if (hasClass(target, 'active'))
+          target.classList.remove('active');
+        else
+          target.classList.add('active');
+
+        const selectedTags = fileTags
+          .filter(f => f.classList.contains('active'));
+
+        searchByTag(selectedTags.map(x => x.getAttribute('tagName')));
+      };
+    });
+  };
+
+  const setTagViewer = (files) => {
+    if (refs.tagViewer) refs?.tagViewer?.remove();
+
+    refs.header.insertAdjacentHTML(
+      'beforeend',
+      `<div class="tag-viewer">
+        <div class="file-tag-references">
+          ${
+            files.map(file => `<a href='/${file}'>${file}</a>`).join('&#65372;')
+          }
+        </div>
+      </div>`);
+  };
+
+  const setTitle = () => {
+    refs.title.innerText = refs.title.innerText.trim().replace(matchers.tag, '');
+    refs.header.insertAdjacentElement('afterbegin', refs.title);
+  };
+
+  const setSubtitle = () => {
+    return refs.tags.insertAdjacentElement('beforebegin', refs.subtitle);
+  };
+
+  const setAuthor = () => {
+    return refs.tags.insertAdjacentHTML(
+      'beforebegin',
+      `<p class="author"><span>by</span> ${getAuthor()}</p>`);
+  };
 
   const changeLinkState = () => {
     const { containers, content, tocLinks: links } = refs;
@@ -76,7 +135,7 @@ window.onload = () => {
     if (!links) return;
 
     const deactivateAll = () =>
-          links.forEach((link) => link.classList.remove('active'));
+      links.forEach((link) => link.classList.remove('active'));
 
     let index = containers.length;
 
@@ -128,17 +187,17 @@ window.onload = () => {
   };
 
   const createHeader = async () => {
-    const tags = await getTags();
+    const tags = await getCurrentTags();
 
     const header = `
       <div class="header">
         <div class="tags">
           ${refs.createdDate ? `<div class="created-date tag">${getDate()}</div>` : ''}
-          ${
-            tags
-              .map(tag =>
-                `<div class="tag" style="--tag-color: ${tag.color || '#6095ad'}">${tag.name}</div>`)
-              .join('')
+          ${tags.map(tag => `
+            <div class="tag" tagName="${tag.name}" style="--tag-color: ${tag.color || '#6095ad'}">
+              ${tag.name}
+              <span class="tag-count">${tag.files.length}</span>
+            </div>`).join('')
           }
         </div>
       </div>`;
@@ -163,6 +222,7 @@ window.onload = () => {
     if (refs.tags && refs.subtitle) setSubtitle();
     if (refs.tags && refs.author) setAuthor();
     if (refs.header && refs.title) setTitle();
+    if (refs.fileTags) addFileTagEvents();
   };
 
   addHeadlineLinks();

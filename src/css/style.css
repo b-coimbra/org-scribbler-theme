@@ -48,8 +48,7 @@ div[id^=outline-container][class=outline-2] {
     color: #828282;
 }
 
-p,
-li {
+p, li, .file-tag-references a {
     font-family: 'Lato', sans-serif;
     font-weight: 500;
     font-size: 12pt;
@@ -180,6 +179,11 @@ content: '\e9ef';
     white-space: nowrap;
 }
 
+.tag-count {
+    margin-left: 5px;
+    filter: brightness(.8);
+}
+
 .tag:not(.created-date):hover {
     opacity: .6;
 }
@@ -201,10 +205,47 @@ content: '\e9ef';
     background: var(--tag-color);
     border-radius: 50%;
     right: -5px;
+    font-size: 7px;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
 }
 
 .tag:not(:last-child) {
     margin-right: 1em;
+}
+
+.tag.active {
+    background: var(--tag-color);
+    color: white;
+}
+
+.tag.active:hover {
+    opacity: 1;
+}
+
+.tag.active:hover::after {
+    transform: scale(1.5);
+}
+
+.tag.active::after {
+    content: '\2715'; /* X symbol */
+    background: transparent;
+    color: white;
+}
+
+.tag.active .tag-count {
+    filter: none;
+}
+
+.tag-viewer {
+    border-top: 1px solid #404040;
+    margin-top: 1em;
+    padding: 1em 0 0;
+}
+
+.file-tag-references {
+    color: #404040;
 }
 
 .header .created-date {
@@ -496,4 +537,5 @@ blockquote::before {
 
 .credits a {
     color: #787878;
+    font-size: inherit;
 }
