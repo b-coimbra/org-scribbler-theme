@@ -72,7 +72,7 @@ li {
     padding: .2em 0;
 }
 
-a:not([href^='#org']), a > b {
+a:not([id^=org] > [href^='#org']), a > b {
     color: #86afe3;
     font-weight: bold;
 }
