@@ -177,7 +177,7 @@ window.onload = () => {
     const credits = `
         <p class="credits">
           <span>Made with<span>
-          <a href="https://github.com/b-coimbra/org-scribbler-theme" ignore-icon="link">
+          <a href="https://github.com/b-coimbra/org-scribbler-theme" ignore-icon="link" class="credits-button">
             org-scribbler
           </a>
         </p>
