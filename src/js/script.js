@@ -87,10 +87,7 @@ window.onload = () => {
 
     fileTags.forEach(tag => {
       tag.onclick = ({ currentTarget: target }) => {
-        if (hasClass(target, 'active'))
-          target.classList.remove('active');
-        else
-          target.classList.add('active');
+        target.classList.toggle('active');
 
         const selectedTags = fileTags
           .filter(f => f.classList.contains('active'));
