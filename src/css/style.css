@@ -362,10 +362,73 @@ table th {
     padding: 1em 0;
 }
 
+#toolbar {
+    position: absolute;
+    width: 40px;
+    right: calc(50% - 440px);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: #181818;
+    border-radius: 0 5px 5px 0;
+    box-shadow: inset 1px 0 #242424;
+}
+
+.toolbar-button {
+    --accent: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: #3c3c3c;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.toolbar-button.home-button {
+    --accent: #426368;
+}
+
+.toolbar-button.favorite-button {
+    --accent: #ab8a4f;
+}
+
+.toolbar-button.go-upward-button {
+    --accent: #934473;
+}
+
+.toolbar-button:hover {
+    box-shadow: -2px 0 var(--accent);
+    color: #838383;
+}
+
 @media (max-width: 1280px) {
     #table-of-contents {
         left: calc(-100% + 200px);
         padding-left: 1em;
+    }
+
+    #toolbar {
+        top: calc(100% - 60px);
+        width: 100px;
+        flex-wrap: nowrap;
+        height: 50px;
+        right: 0;
+        left: 0;
+        border-radius: 5px;
+        box-shadow: 0 0 0 1px #242424;
+    }
+
+    .toolbar-button:hover {
+        box-shadow: 0 2px 0 var(--accent);
     }
 }
 

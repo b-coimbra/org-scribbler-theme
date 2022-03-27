@@ -27,16 +27,15 @@ window.onload = () => {
     tocLinks: '#table-of-contents ul li',
     containers: '[id^=outline-container-org]',
     headlines: '[id^=outline-container-org] h2, [id^=outline-container-org] h3',
-    tagViewer: '.tag-viewer'
+    tagViewer: '.tag-viewer',
+    toolbarFavButton: '.favorite-button',
+    toolbarGoUpButton: '.go-upward-button'
   });
 
   const matchers = {
     date: /(\d+\-?)+/,
     tag: /@\w+/g
   };
-
-  const hasClass = (el, className) =>
-    el.classList.contains(className);
 
   const getDate = () =>
     refs.createdDate.innerText.match(matchers.date)[0];
@@ -183,6 +182,24 @@ window.onload = () => {
     refs.toc.insertAdjacentHTML('beforeend', credits);
   };
 
+  const addToolbar = () => {
+    document.body.insertAdjacentHTML('beforeend', `
+      <div id="toolbar">
+        <button class="home-button toolbar-button" title="Return to homepage" onclick="window.location = window.location.origin">
+          <span class="material-icons">home</span>
+        </button>
+        <!-- <button class="favorite-button toolbar-button" title="Favorite this page">
+          <span class="material-icons">favorite_border</span>
+        </button> -->
+        <button class="go-upward-button toolbar-button" title="Go up">
+          <span class="material-icons">arrow_upward</span>
+        </button>
+      </div>`);
+
+    refs.toolbarGoUpButton.onclick = () =>
+      refs.content.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const createHeader = async () => {
     const tags = await getCurrentTags();
 
@@ -226,6 +243,7 @@ window.onload = () => {
   createHeader();
   changeLinkState();
   addCredits();
+  addToolbar();
 
   refs.content.onscroll = changeLinkState;
 };
