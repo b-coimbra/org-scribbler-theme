@@ -28,6 +28,7 @@ window.onload = () => {
     containers: '[id^=outline-container-org]',
     headlines: '[id^=outline-container-org] h2, [id^=outline-container-org] h3',
     tagViewer: '.tag-viewer',
+    toolbar: '#toolbar',
     toolbarFavButton: '.favorite-button',
     toolbarGoUpButton: '.go-upward-button'
   });
@@ -154,6 +155,11 @@ window.onload = () => {
 
       links[index].classList.add('active');
 
+      if (content.scrollTop === 0)
+        refs.toolbar?.classList?.add('hidden');
+      else
+        refs.toolbar?.classList?.remove('hidden');
+
       if (content.scrollTop >= (content.scrollHeight - content.offsetHeight)) {
         deactivateAll();
         links[links.length - 1].classList.add('active');
@@ -184,13 +190,7 @@ window.onload = () => {
 
   const addToolbar = () => {
     document.body.insertAdjacentHTML('beforeend', `
-      <div id="toolbar">
-        <button class="home-button toolbar-button" title="Return to homepage" onclick="window.location = window.location.origin">
-          <span class="material-icons">home</span>
-        </button>
-        <!-- <button class="favorite-button toolbar-button" title="Favorite this page">
-          <span class="material-icons">favorite_border</span>
-        </button> -->
+      <div id="toolbar" class="hidden">
         <button class="go-upward-button toolbar-button" title="Go up">
           <span class="material-icons">arrow_upward</span>
         </button>
