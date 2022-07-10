@@ -44,6 +44,8 @@ window.onload = () => {
   const getAuthor = () =>
     refs.author.innerText.split('Author: ').join('');
 
+  const getTitle = () => refs.title.innerText;
+
   const getAllTags = async () => {
     if (document.URL.startsWith('file')) return [];
 
@@ -105,7 +107,7 @@ window.onload = () => {
       `<div class="tag-viewer">
         <div class="file-tag-references">
           ${
-            files.map(file => `<a href='/${file}'>${file}</a>`).join('&#65372;')
+            files.map(file => `<a href='/${file}'>${ file === '' ? getTitle() : file }</a>`).join('&#65372;')
           }
         </div>
       </div>`);
