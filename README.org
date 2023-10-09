@@ -13,6 +13,8 @@ Preview: [[https://wiki.metaphoric.dev][https://wiki.metaphoric.dev]]
     ,#+setupfile: https://b-coimbra.github.io/org-scribbler-theme/scribbler.setup
   #+end_src
 
+ Then export the file by using =C-c C-e #= or =M-x org-export-dispatch=
+
 ** Subtitle
 
    Subtitles can be added with the following tag:
