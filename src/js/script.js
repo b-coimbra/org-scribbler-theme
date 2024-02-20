@@ -188,6 +188,8 @@ window.onload = () => {
 
       id = node?.innerHTML ?? content;
 
+      id = id.toLowerCase().replaceAll(' ', '-');
+
       tocAnchor.setAttribute('href', '#' + id);
       headline.setAttribute('id', id);
 
