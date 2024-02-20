@@ -72,16 +72,20 @@ li {
     padding: .2em 0;
 }
 
-a:not([id^=org] > [href^='#org']):not(.credits-button), a > b {
+a:not(.headline-anchor):not(.credits-button), a > b {
     color: #86afe3;
     font-weight: bold;
 }
 
-a:not([href^='#org']):hover {
+a:not(.headline-anchor):hover {
     color: #6a94b9;
 }
 
-a:not([href^='#org']):not([ignore-icon='link'])::before {
+#table-of-contents a::before {
+    display: none;
+}
+
+a:not(.headline-anchor):not([ignore-icon='link'])::before {
     content: '\e157';
     margin-right: 3px;
     font-family: 'Material Icons';
@@ -91,7 +95,7 @@ a:not([href^='#org']):not([ignore-icon='link'])::before {
 	font-size: 16pt;
 }
 
-a[href^='#org'] {
+.headline-anchor {
     color: inherit;
 }
 
@@ -127,7 +131,7 @@ b {
 
 #content h2 > a::before,
 #content h3 > a::before {
-content: '\e9ef';
+    content: '\e9ef';
     position: absolute;
     left: -25px;
     color: #61636a;

@@ -172,8 +172,29 @@ window.onload = () => {
   const addHeadlineLinks = () => {
     if (!refs.headlines) return;
 
+    if (refs.toc)
+      refs.content.insertAdjacentElement('beforebegin', refs.toc);
+
     Array.from(refs.headlines).forEach(headline => {
-      headline.innerHTML = `<a href="#${headline.getAttribute('id')}">${headline.innerHTML}</a>`;
+      let id = headline.getAttribute('id');
+
+      const content = headline.innerHTML;
+
+      const node = new DOMParser()
+            .parseFromString(content, "text/html")
+            .body.firstElementChild;
+
+      const tocAnchor = document.querySelector(`a[href='#${id}']`);
+
+      id = node?.innerHTML ?? content;
+
+      tocAnchor.setAttribute('href', '#' + id);
+      headline.setAttribute('id', id);
+
+      headline.innerHTML =
+        `<a href="#${id}" class="headline-anchor">
+          ${content}
+        </a>`;
     });
   };
 
@@ -217,9 +238,6 @@ window.onload = () => {
           }
         </div>
       </div>`;
-
-    if (refs.toc)
-      refs.content.insertAdjacentElement('beforebegin', refs.toc);
 
     if (refs.introduction) {
       if (refs.introduction.length && refs.firstOutline)
