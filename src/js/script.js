@@ -198,6 +198,9 @@ window.onload = () => {
           ${content}
         </a>`;
     });
+
+    if (location.hash)
+      location.href = location.hash;
   };
 
   const addCredits = () => {
